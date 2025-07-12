@@ -1,10 +1,13 @@
-<script setup>
-import AppMenu from './AppMenu.vue'
-</script>
-
 <template>
-  <div class="p-8">
-    <AppMenu />
+  <component :is="layout">
     <router-view />
-  </div>
+  </component>
 </template>
+
+<script setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const layout = computed(() => route.meta.layout || 'div');
+</script>
